@@ -5,13 +5,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: checkout code
       - uses: actions/checkout@v3
 
       - name: Build the stack
         run: docker-compose up -d
 
       - name: Log in to Docker Hub
-        run: docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Push image to Docker Hub
-        run: docker pushsupernovas/project:flask_app
+        uses: docker/build-push-action@v3
+        with: 
+          usernmae: ${{ secrets.DOCKERHUB_USERNAME }} 
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          tags: latest
+          
