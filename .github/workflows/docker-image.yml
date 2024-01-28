@@ -1,20 +1,31 @@
 name: Docker Compose Actions Workflow
 
-on: push
+on:
+  push:
+    branches:
+      - master
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout code
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Build the stack
         run: docker-compose up -d
 
       - name: Log in to Docker Hub
-        uses: docker/build-push-action@v3
-        with: 
-          usernmae: ${{ secrets.DOCKERHUB_USERNAME }} 
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          tags: latest
-          
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./path/to/your/docker-compose.yml
+          platforms: linux/amd64
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/your-repo:latest
