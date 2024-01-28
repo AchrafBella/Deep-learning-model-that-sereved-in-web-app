@@ -11,7 +11,10 @@ jobs:
         run: docker-compose up -d
 
       - name: Log in to Docker Hub
-        run: docker login --username ${{ DOCKERHUB_USERNAME }} --password-stdin ${{ DOCKERHUB_TOKEN }}
+        with:
+          username : ${{ secrets.DOCKERHUB_USERNAME }} 
+          password : ${{ secrets.DOCKERHUB_TOKEN }}
+        run: docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Push image to Docker Hub
-        run: docker push flask_app
+        run: docker pushsupernovas/project:flask_app
