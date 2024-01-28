@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Selection Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .model-selector {
+            margin-bottom: 20px;
+        }
+
+        .prediction-result {
+            margin-top: 20px;
+        }
+
+        .logout-btn {
+            margin-top: 20px;
+        }
+
+        .file-selector {
+            margin-top: 20px;
+        }
+
+        .scrolldown {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/predict" method="post" enctype="multipart/form-data">
+        <div class="model-selector">
+            <label for="model">Select a Model:</label>
+            <select id="model" name="model">
+                <option value="Model 1">Model 1</option>
+                <option value="Model 2">Model 2</option>
+            </select>
+            <button type="submit">Send Request</button>
+        </div>
+
+        <!-- File input -->
+        <div class="file-selector">
+            <label for="file">Select a picture:</label>
+            <input type="file" id="file" name="file" required="required">
+        </div>
+
+        <img src="{{ data_image }}" alt="User Image">
+    
+        <!-- Display prediction result -->
+        <div class="prediction-result">
+            <h3>Prediction Result:</h3>
+            <p>{{ prediction }}</p>
+        </div>
+
+    </form>
+
+    <div class="scrolldown">
+        {{ table | safe }}
+    </div>
+
+    <!-- Logout button at the end of the page -->
+    <form action="/logout" method="post" class="logout-btn">
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# Use an official TensorFlow Serving runtime as a parent image
+FROM tensorflow/serving:latest
+
+# Copy the saved_models directory into the container
+COPY ./saved_models /models/model
+
+# port
+EXPOSE 8501
+
+# Run the specified command
+CMD ["bash", "-c", "docker run -it -p 8500:8500 -p 8501:8501 --entrypoint /bin/bash tensorflow/serving"]
