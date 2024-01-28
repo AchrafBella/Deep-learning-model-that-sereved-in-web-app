@@ -8,6 +8,8 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 COPY ./APP /DL_project/APP
 COPY ./database /DL_project/database
 
+RUN mkdir -p static
+
 EXPOSE 8080
 
 ENV FLASK_APP=APP/api.py
