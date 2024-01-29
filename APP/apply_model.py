@@ -2,7 +2,6 @@ import requests
 from PIL import Image
 import numpy as np
 
-
 MODELS_config = {'Model 1': (128, 128), 'Model 2': (31, 31)}
 MODELS_version = {'Model 1': 1, 'Model 2': 2}
 LABELS = ['Cucumber', 'Pumpkin', 'Carrot', 'Radish', 'Potato', 'Broccoli', 'Papaya',

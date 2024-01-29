@@ -9,7 +9,6 @@ def create_connection(db_file):
     with sqlite3.connect(db_file) as conn:
         return conn
 
-
 def create_user_table(conn):
     """ create a table called CACHE
     :param conn: Connection object
@@ -63,13 +62,12 @@ def display_DL_model_data(conn):
     with conn:
         return conn.execute("""SELECT * FROM monitoring""").fetchall()
     
-def clear_tables(conn):
-    """ delete the table
+def clear_table(conn):
+    """ delete all the records in the table
     :param conn: Connection object
     """
     with conn:
-        conn.execute("""DROP TABLE users""")
-        conn.execute("""DROP TABLE monitoring""")
+        conn.execute("""DELETE FROM monitoring""")
 
 def check_credintials(conn, username, password):
     query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"

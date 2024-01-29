@@ -20,9 +20,9 @@ services:
       - tensorflow-serving
     networks:
       - ml_network
-    #volumes:
-    #  - C:\\Users\Eye patch\Desktop\project DL deployement\APP\static:/DL_project/APP/static
-    #  - C:\\Users\Eye patch\Desktop\project DL deployement\database\:/DL_project/database
+    volumes:
+      - C:\\Users\Eye patch\Desktop\project DL deployement\APP\static:/DL_project/APP/static
+      - C:\\Users\Eye patch\Desktop\project DL deployement\database\:/DL_project/database
 
 networks:
   ml_network:

@@ -50,12 +50,15 @@
     <div class="login-container">
         <h2>Login</h2>
         <form action="{{ url_for('login') }}" method="post">
+            {{ form.csrf_token }}
             
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+            {{ form.username.label }}
+            {{ form.username(size=30) }}
+            {{ form.username.errors }}
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            {{ form.password.label }}
+            {{ form.password() }}
+            {{ form.password.errors }}
 
             <button id="Enter" type="submit" class="button">Login</button>
         </form>
