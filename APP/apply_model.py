@@ -30,7 +30,7 @@ def preprocess_image(image_path, dimensions):
     except Exception as e:
         return {'Error': True, 'Message': str(e)}
 
-def tensorflow_serving_models(version, tensorflow_server_input):
+def tensorflow_serving_models(version, tensorflow_server_input, link='tensorflow-serving:8501'):
     """
     Send a POST request to a TensorFlow Serving endpoint for model inference.
 
@@ -44,7 +44,7 @@ def tensorflow_serving_models(version, tensorflow_server_input):
     try:
         model_name = 'model' # Use the model name exist in saved_models in tensorflow server
         model_version = MODELS_version[version]
-        serving_url = f'http://tensorflow-serving:8501/v1/models/{model_name}/versions/{model_version}:predict'
+        serving_url = f'http://{link}/v1/models/{model_name}/versions/{model_version}:predict'
         response = requests.post(serving_url, json=tensorflow_server_input)
         prediction = response.json()
         return {'Error': False, 'Prediction': prediction.get('predictions')}

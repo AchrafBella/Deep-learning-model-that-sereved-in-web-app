@@ -62,12 +62,19 @@ def display_DL_model_data(conn):
     with conn:
         return conn.execute("""SELECT * FROM monitoring""").fetchall()
     
-def clear_table(conn):
+def clear_monitoring_table(conn):
     """ delete all the records in the table
     :param conn: Connection object
     """
     with conn:
         conn.execute("""DELETE FROM monitoring""")
+
+def clear_user_table(conn):
+    """ delete all the records in the table
+    :param conn: Connection object
+    """
+    with conn:
+        conn.execute("""DELETE FROM users""")
 
 def check_credintials(conn, username, password):
     query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"
@@ -76,4 +83,3 @@ def check_credintials(conn, username, password):
         if res:
             return True
         return False
-    

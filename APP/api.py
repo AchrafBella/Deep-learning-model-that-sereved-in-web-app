@@ -1,6 +1,6 @@
 from flask import Flask, request, session, url_for, redirect, render_template
 from APP.apply_model import predictor
-from APP.db import create_connection, check_credintials, add_prediction_information, display_DL_model_data, clear_table
+from APP.db import create_connection, check_credintials, add_prediction_information, display_DL_model_data, clear_monitoring_table
 from APP.wtf_model import LoginForm, PredictionForm
 import pandas as pd
 import os
@@ -58,7 +58,7 @@ def delete_all_records():
         return redirect(url_for('login'))
 
     conn = create_connection('database/sqlite.db')
-    clear_table(conn)
+    clear_monitoring_table(conn)
 
     table = display_DL_model_data(conn)
     df = pd.DataFrame(table, columns=app.config['COLS'])
